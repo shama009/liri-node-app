@@ -9,6 +9,8 @@ var Twitter = require('twitter');
 var userCommand = process.argv[2];
 var userInput = process.argv[3];
 
+loguserInput();
+
 switch (userCommand) {
     case "my-tweets": getTweets(); break;
     case "spotify-this-song": getSpotifyData(); break;
@@ -113,7 +115,7 @@ function getTweets() {
         access_token_secret: keys.twitterKeys.access_token_secret
     });
 
-    var params = { screen_name: 'buzzfeed' };
+    var params = { screen_name: 'realDonaldTrump' };
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) {
             for (var i = 0; i < 20; i++) {
@@ -125,6 +127,34 @@ function getTweets() {
             return console.log(error);
         }
     });
+}
+
+// write user input commands to log.txt
+// We then append the contents into the file
+// If the file didn't exist then it gets created on the fly.
+function loguserInput() {
+    var command = "";
+    var input = "";
+    if (userCommand) {
+        command = userCommand;
+    }
+    if (userInput) {
+        input = ",'" + userInput + "'";
+    }
+    fs.appendFile("log.txt", command + input + "\n", function (err) {
+
+        // If an error was experienced we say it.
+        if (err) {
+            console.log(err);
+        }
+
+        // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+        else {
+            console.log("updated log.txt with user Input!");
+        }
+
+    });
+
 }
 
 
