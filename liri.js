@@ -15,7 +15,6 @@ switch (userCommand) {
     case "movie-this": getMovieData(); break;
     case "do-what-it-says": getRandomtxt(); break;
     default: console.log("Please enter valid input command");
-
 }
 
 // IMDB data
@@ -84,7 +83,7 @@ function getSpotifyData() {
         id: keys.spotifyKeys.client_id,
         secret: keys.spotifyKeys.client_secret
     });
-    if (!userInput){
+    if (!userInput) {
         userInput = "The Sign by Ace of Base";
     }
     spotify.search({ type: 'track', query: userInput, limit: 10 }, function (err, data) {
@@ -112,20 +111,20 @@ function getTweets() {
         consumer_secret: keys.twitterKeys.consumer_secret,
         access_token_key: keys.twitterKeys.access_token_key,
         access_token_secret: keys.twitterKeys.access_token_secret
-      });
-       
-      var params = {screen_name: 'BarackObama'};
-      client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    });
+
+    var params = { screen_name: 'BarackObama' };
+    client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) {
-            for(var i = 0; i<20; i++){
-                var index=i+1;
-                console.log("\n"+ index +") " + tweets[i].text + "\nCreated At: "+tweets[i].created_at);
-            } 
+            for (var i = 0; i < 20; i++) {
+                var index = i + 1;
+                console.log("\n" + index + ") " + tweets[i].text + "\nCreated At: " + tweets[i].created_at);
+            }
         }
-        else{
+        else {
             return console.log(error);
         }
-      });
+    });
 }
 
 
