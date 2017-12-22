@@ -74,6 +74,59 @@ function getRandomtxt() {
     });
 }
 
+// spotify data
+// Artist(s)
+// The song's name
+// A preview link of the song from Spotify
+// The album that the song is from
+function getSpotifyData() {
+    var spotify = new Spotify({
+        id: keys.spotifyKeys.client_id,
+        secret: keys.spotifyKeys.client_secret
+    });
+    if (!userInput){
+        userInput = "The Sign by Ace of Base";
+    }
+    spotify.search({ type: 'track', query: userInput, limit: 10 }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        var songInfo = data.tracks.items;
+        for (var i = 0; i < songInfo.length; i++) {
+            console.log("Artist(s): " + songInfo[i].artists[0].name);
+            console.log("The song's name: " + songInfo[i].name);
+            console.log("Preview link: " + songInfo[i].preview_url);
+            console.log("Album: " + songInfo[i].album.name);
+            console.log("---------------------------------------");
+        }
+
+    });
+}
+
+// twitter data
+// show last 20 tweets and when they were created at in your terminal/bash window
+function getTweets() {
+    var client = new Twitter({
+        consumer_key: keys.twitterKeys.consumer_key,
+        consumer_secret: keys.twitterKeys.consumer_secret,
+        access_token_key: keys.twitterKeys.access_token_key,
+        access_token_secret: keys.twitterKeys.access_token_secret
+      });
+       
+      var params = {screen_name: 'BarackObama'};
+      client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if (!error) {
+            for(var i = 0; i<20; i++){
+                var index=i+1;
+                console.log("\n"+ index +") " + tweets[i].text + "\nCreated At: "+tweets[i].created_at);
+            } 
+        }
+        else{
+            return console.log(error);
+        }
+      });
+}
 
 
 
