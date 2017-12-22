@@ -1,20 +1,34 @@
 // import keys.js to use its contents
 var keys = require("./keys.js");
 var request = require("request");
+var fs = require("fs");
+var Spotify = require('node-spotify-api');
+var Twitter = require('twitter');
 
+// Global variables for user input
 var userCommand = process.argv[2];
 var userInput = process.argv[3];
 
-if (userCommand === "movie-this") {
+switch (userCommand) {
+    case "my-tweets": getTweets(); break;
+    case "spotify-this-song": getSpotifyData(); break;
+    case "movie-this": getMovieData(); break;
+    case "do-what-it-says": getRandomtxt(); break;
+    default: console.log("Please enter valid input command");
+
+}
+
+// IMDB data
+function getMovieData() {
     var queryUrl = "";
-    if(userInput){
-    // Then run a request to the OMDB API with the movie specified
+    if (userInput) {
+        // Then run a request to the OMDB API with the movie specified
         queryUrl = "http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy";
-    
+
         // This line is just to help us debug against the actual URL.
         console.log(queryUrl);
     }
-    else{
+    else {
         queryUrl = "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
     }
     request(queryUrl, function (error, response, body) {
@@ -43,4 +57,24 @@ if (userCommand === "movie-this") {
         }
     });
 }
+
+// random.txt data
+function getRandomtxt() {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        // If the code experiences any errors it will log the error to the console.
+        if (error) {
+            return console.log(error);
+        }
+
+        // Then split it by commas (to make it more readable)
+        var dataArr = data.split(",");
+        userCommand = dataArr[0];
+        userInput = dataArr[1];
+        getSpotifyData();
+    });
+}
+
+
+
+
 
