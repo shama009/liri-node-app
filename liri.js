@@ -84,7 +84,7 @@ function getSpotifyData() {
         secret: keys.spotifyKeys.client_secret
     });
     if (!userInput) {
-        userInput = "The Sign by Ace of Base";
+        userInput = "The Sign";
     }
     spotify.search({ type: 'track', query: userInput, limit: 10 }, function (err, data) {
         if (err) {
@@ -113,7 +113,7 @@ function getTweets() {
         access_token_secret: keys.twitterKeys.access_token_secret
     });
 
-    var params = { screen_name: 'BarackObama' };
+    var params = { screen_name: 'buzzfeed' };
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) {
             for (var i = 0; i < 20; i++) {
