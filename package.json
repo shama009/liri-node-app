@@ -1,0 +1,28 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "Liri node app using Twitter, Spotify and OMDB APIs",
+  "main": "keys.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shama009/liri-node-app.git"
+  },
+  "keywords": [
+    "liri",
+    "nodeapp"
+  ],
+  "author": "Shama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shama009/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/shama009/liri-node-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "twitter": "^1.7.1"
+  }
+}
