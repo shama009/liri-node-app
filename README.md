@@ -26,7 +26,7 @@ Liri will take following commands:
    It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
 5. Each command you run is saved to the **log.txt** file.
 
-# APIs used:
+# npm packages/APIs used:
 
 [Twitter](https://www.npmjs.com/package/twitter)
 
